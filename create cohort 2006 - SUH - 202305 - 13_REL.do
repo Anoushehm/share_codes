@@ -3,9 +3,9 @@
 *
 * 2021 SHRF - Substance Use Harm (SUH) Project                              ****
 * ============================================================================ *
-* For: Creating a provincial substance use cohort to evaluate Canadian Census
-*   Health and Environment Cohorts' (CanCHEC) strengths and limitations by 
-*   comparing it to substance use cohorts that only used provincial data 
+* For: Creating a provincial substance use cohort to evaluate the Canadian 
+*   Census Health and Environment Cohorts' (CanCHEC) strengths and limitations 
+*   by comparing it to substance use cohorts that only used provincial data 
 *   repositories, such as the BC cohort.
 *
 * Task: Create a cohort of Saskatchewanians who are respondents to the 2006 Census
@@ -24,32 +24,37 @@
 * ABOUT CANCHEC                                                             ****
 * ---------------------------------------------------------------------------- *
 * CanCHEC is a set of key files that enables linking Census long-form to 
-* hospitalization, emergency, mortality, cancer registry, among other databases.
+* hospitalization, emergency, mortality, and cancer registry, among other databases.
 * This linkage happens at the individual level. That is, the socioeconomic and 
 * ethnocultural information of the Census respondents can be linked to their 
-* health records, such as hospitalization. 
+* health records, such as hospitalization. Databases used in this do-file are
+* listed below:
 *
-* The history of the hospitalization emergency records of these individuals can 
-* be tracked from years before the Census date followed until the years after 
+*   - Discharge Abstract Database (DAD)
+*   - Canadian Vital Statistics Death Database (CVSD)
+*   - Census 2006 (long-form)
+*
+* The health records, such as hospitalization, of these individuals can be
+* tracked from years before the Census date followed to the years after 
 * the Census date. For example, in CanCHEC 2006, we can link the information of 
 * Census 2006 respondents to their hospitalization records, from 2000 to 2016 
 * (fiscal years.) 
 * 
-* Each of these key files can be merged into a database based on a specific set of
-* variables. Below is a summary of how these key files work:
+* Each of the CanCHEC's key files can be merged with a database based on a 
+* specific set of variables. Below is a summary of how these key files work:
 *
 *   1. Master key file: This key file contains all individuals included in CanCHEC 
 *      2006. In this dataset, individuals are uniquely identified by the variable
-*      "UniqID." This is a person-based dataset, and its number of observations 
+*      "UniqID". This is a person-based dataset, and its number of observations 
 *       equals the number of individuals in CanCHEC 2006.
-
+*
 *   2. Bootstrap key file: This key file contains the CanCHEC 2006 weight 
-*      (CanCHECW2) along with its bootstrap weight. The CanCHECW2 is the Census 
-*      2006 weight variable that is adjusted to represent the CanCHEC cohort.
-
+*      (CanCHECW2) along with its bootstrap weights. The "CanCHECW2" is the Census 
+*      2006 weight variable adjusted to represent the CanCHEC cohort.
+*
 *   3. CMDBonly key file: This dataset contains the death records of those in the
 *      CanCHEC that are not captured by CVSD.	
-
+*
 *   4. DAD key file: Similar to DAD, the DAD key file is an event-based dataset,
 *      where each observation represents one hospitalization event. The DAD key file
 *      enables researchers to link DAD annual files to the Master key file. In that, 
@@ -58,6 +63,8 @@
 *      resulted dataset can then be linked to the Master key file using "uniqid" 
 *      variable.
 *
+*  Appendix A in the manuscript illustrates the relationship between CanCHEC's
+*  components that are used in this do-file.
 * ---------------------------------------------------------------------------- *
 
 * NAMING FILES                                                              ****
