@@ -3,20 +3,22 @@
 *
 * 2021 SHRF - Substance Use Harm (SUH) Project                              ****
 * ============================================================================ *
-* For: Creating a provincial substance use cohort to evaluate CanCHEC's 
-*   strengths and limitations by comparing it to substance use cohorts that 
-*   only used provincial data repositories, such as the BC cohort.
+* For: Creating a provincial substance use cohort to evaluate Canadian Census
+*   Health and Environment Cohorts' (CanCHEC) strengths and limitations by 
+*   comparing it to substance use cohorts that only used provincial data 
+*   repositories, such as the BC cohort.
 *
 * Task: Create a cohort of Saskatchewanians who are respondents to the 2006 Census
-*   long-form. This cohort follows hospitalization and mortality information from 
-*   2006 to 2016. This cohort includes hospitalization's and mortality's ICD 
-*   codes to identify SUH cases. Diagnosis codes and types also are kept in 
-*   the final dataset to enable an analysis of the Charlson Index.
+*   long-form. This cohort follows hospitalization and mortality information of 
+*   the respondents from 2006 to 2016. The cohort includes hospitalization's 
+*   and mortality's ICD codes to identify SUH cases. Diagnosis codes and types 
+*   are also included in the final dataset to enable an analysis of the Charlson 
+*   Index.
 *
 * Programmer: Anousheh Marouzi
 *
 * Start date: December 20th, 2022
-* Last update: December 21st, 2023
+* Last update: January 9th, 2024
 * ============================================================================ *
 
 * ABOUT CANCHEC                                                             ****
