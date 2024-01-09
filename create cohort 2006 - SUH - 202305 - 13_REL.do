@@ -50,7 +50,9 @@
 *
 *   2. Bootstrap key file: This key file contains the CanCHEC 2006 weight 
 *      (CanCHECW2) along with its bootstrap weights. The "CanCHECW2" is the Census 
-*      2006 weight variable adjusted to represent the CanCHEC cohort.
+*      2006 weight variable adjusted to represent the CanCHEC cohort. The 
+*      bootstrap key file can be linked to the Master key file using "uniqid"
+*      variable.
 *
 *   3. CMDBonly key file: This dataset contains the death records of those in the
 *      CanCHEC that are not captured by CVSD.	
@@ -75,35 +77,40 @@
 * datasets to create a data product that can be used in further research. 
 * Thereby, each defined program opens a dataset, manipulates it, and saves it by
 * a meaningful name. 
-
-* The structure of a dataset file's name is presented below: 
-
-*   CanCHEC`cycle'_`main info'_`geo'_`years covered'_`extra info'_`stage'
-
-* The explanation for each section of this structure is provided below:
-
+*
+* An overview of the structure of a dataset file's name is presented below: 
+*
+*    canchec`cycle'_`main info'_`geo'_`years covered'_`extra info'_`stage'
+*
+* The explanation for each section of this structure is as follows:
+*
 * 1. CanCHEC cycle as prefix: (Mandatory)
 *    Every dataset in this do-file must have a prefix indicating which CanCHEC
 *    cycle it is related to. The CanCHEC cycle used in this do-file is 2006.
 *    Therefore, all datasets used in this do-file have the prefix of 
-*    "CanCHEC2006". 
-
+*    "canchec2006". There is only one exception, and that is the CVSD file. 
+*    This is because raw CVSD files provided to the researchers in RDC are not 
+*    manipulated for CanCHEC, meaning that CVSD is Statistics Canada's dataset 
+*    standing on its own, covering the whole Canadian population. While the 
+*    provided DAD datasets for CanCHEC users are manipulated in a way that only 
+*    contains information about individuals in CanCHEC.
+*
 * 2. Main information included in the dataset: (Mandatory)
 *    This section of the file name indicates the main information included in 
-*    the dataset. This is usually the name original name of the dataset, such as
+*    the dataset. This is usually the original name of the dataset, such as
 *    "census" for Census (long-form), "dad" for Discharge Abstract Database, and
 *    "cvsd" for Canadian Vital Statistics Death Database.
-   
+*   
 * 3. Geographic area covered by the dataset: (If Applicable)
 *    Where applicable, the geographic area covered by the dataset is mentioned
 *    here. To show that the dataset covers the whole of Canada, we use "nat" (for 
 *    national), and we use abbreviations of the provinces to show datasets 
 *    limited to a province(s), such as "sk" for Saskatchewan.
-     
+*     
 * 4. Year(s) covered by the dataset: (Mandatory)
 *    Every dataset must have this part indicating the year(s) covered by the 
 *    dataset. For example, "2006", or "2006to2016".
-
+*
 * 5. Extra information about what exists in the dataset: (If Needed)
 *    We add more information in the name of a dataset where we find it helpful
 *    to communicate what exists in a dataset. Explanations for these extra 
@@ -115,7 +122,7 @@
 *        all hospitalizations and deaths.
 *      "_su_hosp" --> indicating that the dataset has dummy variables for 
 *        substance use- (su) related hospitalizations
-
+*
 * 6. Stage of the dataset as suffix: (Mandatory)
 *    Files in this do-file are classified into three main groups: Raw, Master, 
 *    and Use. These are indicative of three main steps that a dataset usually goes
@@ -124,60 +131,72 @@
 *    three statuses of a dataset. Between the Raw and Master steps, we may save the 
 *    dataset as a Reduced or Harmonized file. Following is a flow chart of how a 
 *    dataset is processed in this do-file: 
-    
+*    
 *             RAW --> (REDUCED) --> (HARM) --> MASTER --> USE 
-    
+*    
 *    We add a suffix to the name of a dataset to show these stages. Below, we 
-*    describe these 5 stages and provide the suffix that we use to show them in
-*    parentheses:
-
-*      a. Raw (_RAW): In this do-file, we rename raw dataset files before the 
-*         first time we use them. This is done to have a consistent and 
-*         meaningful name convention in our do-files across all our projects. 
+*    describe these 5 stages and provide the suffix in parentheses as they exist 
+*    in the do-file:
+*
+*      a. Raw (_RAW): The first step in this do-file is to rename all raw dataset 
+*         files according to our naming structure. This is done to have a consistent  
+*         and meaningful name convention in our do-files across all our projects. 
 *         We put the suffix "_RAW" at the end of the renamed raw files. 
-*         These files are 100% similar to the original ones provided in RDC. 
-    
+*         These files are 100% similar to the original ones as provided in RDC. 
+*    
 *      b. Reduced (_REDUCED): We add this suffix to datasets that we have 
-*         dropped some of its variables (reduced the number of variables.) 
-     
+*         dropped some of its variables or observations (reduced the number of 
+*         variables or observations.) 
+*     
 *      c. Harmonized (_HARM): This suffix is added to datasets when its
 *         variables are manipulated in a way to be harmonized in relation to
 *         other datasets in the do-file. For example, variable sex is recoded
 *         in different datasets to be consistent with how it is coded in the Census.
-     
+*     
 *      d. Master (_MASTER): The Master stage of a dataset happens when general 
 *         manipulations, such as reducing the number of variables and recoding
 *         them, have been done, and the dataset is ready for more specialized
 *         manipulation.
-    
+*    
 *      e. Use (_USE): We add the suffix "USE" to a dataset when we have 
 *         manipulated the Master dataset in a way that is ready for analysis.
 *         This analysis can be descriptive, modeling, or any other type of 
 *         analysis that produces the results of a research project. 
+* ---------------------------------------------------------------------------- *
 
 * List of datasets in this do-file: 
-
+* ---------------------------------------------------------------------------- *
 *  Inputs:
-*    1. CanCHEC 2006 - Discharge Abstract Database (DAD) annual files (2000-2016)
-*    2. Canadian Vital Statistics Death Database (CVSD) annual files (2000-2016)
-*    3. Census 2006 long-form
-*    4. CanCHEC 2006 - master keyfile
-*    5. CanCHEC 2006 - bootstrap keyfile
-*    6. CanCHEC 2006 - mdbonly keyfile
-*    7. CanCHEC 2006 - DAD keyfile
+*    1. canchec2006_key_master_RAW
+*    2. canchec2006_key_bs_RAW
+*    3. canchec2006_key_cmdbonly_RAW
+*    4. canchec2006_dad_`year'_RAW for each year 2000-2016
+*    5. canchec2006_key_dad_RAW
+*    6. cvsd_`year'_RAW (2006-2016)
+*    7. cvsd_multi_cause_`year'_RAW for each year 2006-2016
+*    8. census_long_2006_RAW
 *        
 *  Outputs:
-*    1. CanCHEC2006_dad_`year'_REDUCED for each year 2006-2016
-*    3.
-*    4.
-*    5.
-*    6.
-*    7.
+*    1. canchec2006_key_master_HARM
+*    2. canchec2006_key_bs_HARM
+*    3. canchec2006_key_cmdbonly_HARM
+*    4. canchec2006_dad_`year'_REDUCED for each year 2006-2016
+*    5. canchec2006_dad_2006to2016_MASTER
+*    6. cvsd_`year'_REDUCED for each year 2006-2016
+*    7. cvsd_2006to2016_HARM
+*    8. cvsd_2006to2016_MASTER
+*    9. census_long_2006_MASTER
+*    10. canchec2006_cohort_can_06to16_e_USE
+*    11. canchec2006_cohort_sk_06to16_e_USE
+*    12. canchec2006_cohort_sk_06to16_all_hospdeath_e_MASTER
+*    13. canchec2006_cohort_sk_06to16_all_hospdeath_su_hosp_e_MASTER
+*    14. canchec2006_cohort_sk_06to16_all_hospdeath_su_hospdeath_e_USE
+*    15. canchec2006_cohort_sk_06to16_all_hospdeath_su_hospdeath_e_FINAL
 * ---------------------------------------------------------------------------- *
 
 * TABLE OF CONTENTS                                                         ****
 * ---------------------------------------------------------------------------- *
-* 0. Setup
+* 0. SETUP
 * 1. RENAME RAW DATA FILES 
 * 2. HARMONIZE ALL CANCHEC 2006 KEY FILES
 * 3. PREPARE DAD (2006 TO 2016)                                             
@@ -465,7 +484,7 @@ program define reduce_dad
     destring *, replace	
 		
     * Save
-    save ".\Data\canchec2006_dad_`year'_reduced.dta", replace	
+    save ".\Data\canchec2006_dad_`year'_REDUCED.dta", replace	
   }
 end 
 
@@ -475,11 +494,11 @@ program define append_dad
   * in Step 5.
  
   * Open 2006 reduced DAD dataset
-  use ".\Data\canchec2006_dad_2006_reduced.dta", clear
+  use ".\Data\canchec2006_dad_2006_REDUCED.dta", clear
 
   * Append years 2007 to 2016
   forvalues year = 2007/2016 {
-    append using ".\Data\canchec2006_dad_`year'_reduced.dta"
+    append using ".\Data\canchec2006_dad_`year'_REDUCED.dta"
   }
   
   * Merge with CanCHEC 2006 DAD key file to be able to merge with Master Keyfile
@@ -1160,7 +1179,7 @@ program define find_hosp_su
 	  
      CIHI considers a hospitalization related to substance use if a 
      hospitalization abstract has a diagnosis code listed in the table provided 
-     in Appendix XX AND the diagnosis type associated with that diagnosis code is
+     in Appendix B AND the diagnosis type associated with that diagnosis code is
      "M","1","2","W","X","Y",or "9". We call this condition GENERAL CRITERIA.
     
      There are 3 sets of ICD codes that should meet EXTRA CONDITIONS, as 
@@ -1280,7 +1299,7 @@ program define find_hosp_su
     gen hosp_`category'_e = 0
 
     * Check the hospitalization records against our SU case-fiding algorithm
-    * (Appendix XX) using 25 Diagnosis Code and 25 Diagnosis type variables
+    * (Appendix B) using 25 Diagnosis Code and 25 Diagnosis type variables
     forvalues i = 1/25 {
       
       * Start a loop to find SU hospitalizations with GENERAL CRITERIA
@@ -1389,14 +1408,14 @@ end
 
 program define find_death_su	
   * This program identifies death events due to substance use using an algorithm 
-  * developed for this study. The algorithm is provided in Appendix XXX and is 
+  * developed for this study. The algorithm is provided in Appendix B and is 
   * based on related literature.
 
   *  About CIHI's methodology in finding hospitalization due to SU          ****
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
      To identify deaths due to SU for non-poisoning cases, we simply looked at 
      the underlying cause of death to see if it matches the ICD code
-     listed in our SU case-finding algorithm (Appendix XXX.) The underlying 
+     listed in our SU case-finding algorithm (Appendix B.) The underlying 
      cause of death is a variable in the main CVSD datasets named 
      "death_cause_4digits". This variable contains the ICD code attributed to 
      the cause of death.
@@ -1408,7 +1427,7 @@ program define find_death_su
      These variables provide additional information for each death registered 
      in the main CVSD files, which are needed to identify SU poisoning cases.
      The case-finding algorithm for these types of deaths is provided in 
-     Appendix XXX.
+     Appendix B.
 	 
      For poisoning cases, we need the contributing cause of death to identify
      the substance causing the poisoning. The underlying cause only indicates
