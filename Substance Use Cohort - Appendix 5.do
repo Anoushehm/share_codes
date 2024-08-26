@@ -194,7 +194,7 @@
 *    1. canchec2006_key_master_HARM
 *    2. canchec2006_key_bs_HARM
 *    3. canchec2006_key_cmdbonly_HARM
-*    4. canchec2006_dad_`year'_REDUCED for each year 2006-2016
+*    4. canchec2006_dad_`year'_REDUCED         for each year 2006-2016
 *    5. canchec2006_dad_2006to2016_MASTER
 *    6. cvsd_`year'_REDUCED for each year 2006-2016
 *    7. cvsd_2006to2016_HARM
@@ -1122,8 +1122,8 @@ program define find_hosp_death_all
 
   * Details on how variables are named in this program                      ****
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *
-	The prefix "hosp" indicates a dummy variable for hospitalization.
-	The prefix "death" indicates a dummy variable for a death event.
+    The prefix "hosp" indicates a dummy variable for hospitalization.
+    The prefix "death" indicates a dummy variable for a death event.
     The suffix "_e" indicates an event-level variable.
     The suffix "_p" indicates a person-level variable.    
   * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -1825,37 +1825,37 @@ end
 * A1. CONTROL
 * ---------------------------------------------------------------------------- *
 * Rename raw data files
-*  move_raw
+  move_raw
   
 * Harmonize CanCHEC 2006 keyfiles
   ** Harmonize Master keyfile
-*  harm_keyfile_master
+  harm_keyfile_master
   
   ** Harmonize bootstrap keyfile
-*  harm_keyfile_bs
+  harm_keyfile_bs
   
   ** Harmonize CMDBonly keyfile
-*  harm_keyfile_cmdbonly
+  harm_keyfile_cmdbonly
   
 * Prepare DAD
   ** Reduce DAD annual files
-*  reduce_dad
+  reduce_dad
   
   ** Append DAD annual files and link to DAD keyfile
-*  append_dad
+  append_dad
 
 * Prepare CVSD
   ** Reduce CVSD files
-*  reduce_cvsd
+  reduce_cvsd
 
   ** Append CVSD annual files
-*  append_cvsd
+  append_cvsd
 
   ** Merge CVSD main file to multi cause file
-*  merge_cvsd_multi
+  merge_cvsd_multi
 
 * Prepare Census
-*  prep_cens  
+  prep_cens  
 
 * Create national cohort
   create_cohort_nat
